@@ -1,0 +1,21 @@
+<Panel>
+   <!-- ProfileImg Class -->
+   <Panel ux:Class="ProfileButton" HitTestMode="LocalBounds">
+      <float ux:Property="Size" />
+      <FileSource ux:Property="Picture" />
+      <!-- Image -->
+      <Panel Width="{Property this.Size}" Height="{Property this.Size}" Padding="5" >
+         <Circle Color="white" >
+            <Stroke Width="2" Alignment="Center" Color="white" />
+            <ImageFill File="{Property this.Picture}">
+         </Circle>
+      </Panel>
+
+      <!-- BG -->
+      <Panel ux:Name="bg" Color="white" Opacity="0" />
+
+      <WhilePressed>
+         <Change bg.Opacity="0.2" DurationBack="0.1" Easing="CubicOut" />
+      </WhilePressed>
+   </Panel>
+</Panel>

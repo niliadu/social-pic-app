@@ -1,0 +1,17 @@
+<Panel>
+  <Panel ux:Class="CommonButton" Width="100%" Height="50" ButtonColor="color2" Label="BUTTON" ContentColor="white" >
+    <float4 ux:Property="ButtonColor" />
+    <string ux:Property="Label" />
+    <float4 ux:Property="ContentColor" />
+
+    <Rectangle Color="{Property this.ButtonColor}" CornerRadius="50">
+      <!-- Clicked FX -->
+      <Rectangle ux:Name="fx" Color="{Property this.ContentColor}" Opacity="0" CornerRadius="50"/>
+      <WhilePressed>
+        <Change fx.Opacity="0.1" DurationBack="0.1" />
+      </WhilePressed>
+
+      <Medium Value="{Property this.Label}" Color="{Property this.ContentColor}" FontSize="14" TextAlignment="Center" Alignment="Center" />
+    </Rectangle>
+  </Panel>
+</Panel>

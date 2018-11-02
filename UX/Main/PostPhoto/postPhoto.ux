@@ -1,0 +1,37 @@
+<Panel>
+	<DockPanel ux:Class="PostPhotoView" Color="gray1">
+		<Router ux:Dependency="Router" />
+		<UserEvent ux:Name="mainRouterGoToGroup" />
+		<OnUserEvent EventName="mainRouterGoToGroup" Handler="{goToGroupGoTo}"/>
+
+		<JavaScript File="JS/postPhoto.js" />
+		<JavaScript>
+			addBtn = require("addButton");
+			addBtn.set(false);
+		</JavaScript>
+
+		<BackHeader Title="Postar Foto" />
+
+		<Grid Rows="6*,4*" Padding="20" Dock="Fill">
+
+			<!-- Profile Picture -->
+			<Image File="{postPic}" StretchMode="UniformToFill" />
+
+			<Grid RowCount="2" CellSpacing="12" >
+				<!-- Title -->
+				<Panel>
+					<DockPanel Offset="0,8">
+						<!-- <Icon Value="&#xE7FF;" Color="color2" Dock="Left" Alignment="Center"/> -->
+						<TextInput Value="{titlePhoto}" Font="Medium" FontSize="14" TextColor="color2" TextAlignment="Left" CaretColor="gray3" PlaceholderColor="gray2" PlaceholderText="título" Dock="Fill" Alignment="Bottom" Padding="12,8"/>
+					</DockPanel>
+					<Rectangle Color="color2" Height="1" Alignment="Bottom"/>
+				</Panel>
+
+				<!-- Button -->
+				<CommonButton ButtonColor="color2" Label="POSTAR" ContentColor="white" Clicked="{postPhoto}">
+					<!-- <Clicked Handler="{goBack}"/> -->
+				</CommonButton>
+			</Grid>
+		</Grid>
+	</DockPanel>
+</Panel>

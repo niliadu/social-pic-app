@@ -1,0 +1,18 @@
+<Panel>
+	<JavaScript File="JS/main.js" />
+	<!-- Main Navigator -->
+	<Navigator DefaultPath="mainView" Reuse="None" DeferPageSwitch="None" >
+		<MainView ux:Template="mainView" Router="mainRouter" />
+
+		<AboutView ux:Template="about" Router="mainRouter" />
+		<ConfigView ux:Template="config" Router="mainRouter" />
+		<CreateGroupView ux:Template="createGroup" Router="mainRouter" />
+		<GroupView ux:Template="group" Router="mainRouter" />
+		<GroupConfigView ux:Template="groupConfig" Router="mainRouter" />
+		<PostPhotoView ux:Template="postPhoto" Router="mainRouter" />
+		<ProfileView ux:Template="profile" Router="mainRouter" />
+		<PhotoScoreView ux:Template="photoScore" Router="mainRouter" />
+		
+	</Navigator>
+
+</Panel>

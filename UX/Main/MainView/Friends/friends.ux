@@ -1,0 +1,21 @@
+<Panel>
+	<Page ux:Class="FriendsView">
+		<Router ux:Dependency="Router" />
+
+
+		<ScrollView Padding="20">
+			<StackPanel ItemSpacing="8">
+				<!-- For Each Category -->
+				<Each Count="1">
+					<Div.Label Title="Favoritos" />
+					<Grid ColumnCount="3" CellSpacing="8">
+						<!-- Show friends -->
+						<Each Count="20">
+							<UserItem.Module Picture="{avatar}" Nickname="Some User" />
+						</Each>
+					</Grid>
+				</Each>
+			</StackPanel>
+		</ScrollView>
+	</Page>
+</Panel>

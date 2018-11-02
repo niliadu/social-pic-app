@@ -1,0 +1,58 @@
+<Panel>
+	<Page ux:Class="ProfileView" Color="gray1">
+		<Router ux:Dependency="Router" />
+
+		<JavaScript File="JS/profile.js" />
+		<JavaScript>
+		addBtn = require("addButton");
+		addBtn.set(false);
+		</JavaScript>
+
+		<DockLayout/>
+
+		<BackHeader Title="Perfil"/>
+
+		<StackPanel ItemSpacing="10" Padding="20, 0, 20 ,0">
+
+			<!-- Profile Picture -->
+			<StackPanel Width="120">
+				<Panel MinHeight="120" Color="gray3">
+					<Image File="{profilePic}" StretchMode="Uniform" />
+				</Panel>
+				<Rectangle Width="100%" Height="30" Color="gray2" ux:Name="changePhoto">
+					<Medium Value="editar foto" FontSize="14" TextColor="white" TextAlignment="Center" Alignment="Center" />
+					<Clicked Handler="{changeProfilePicture}"/>
+					<WhileFalse  Value="{flagEdit}">
+						<Change changePhoto.Visibility="Hidden" Delay="0.2" />
+					</WhileFalse>
+				</Rectangle>
+			</StackPanel>
+
+			<!-- uname -->
+			<Panel MinHeight="15">
+				<DockPanel>
+					<!-- <Image Source="icon_profile" Color="color2" Height="26" Dock="Left"/> -->
+					<Medium Value="{nick}" FontSize="14" TextColor="gray2" TextAlignment="Center" Dock="Fill" Padding="15,5,0,0" />
+				</DockPanel>
+			</Panel>
+			<Panel MinHeight="15">
+				<DockPanel>
+					<!-- <Image Source="icon_profile" Color="color2" Height="26" Dock="Left"/> -->
+					<Medium Value="{uname}" FontSize="14" TextColor="gray2" TextAlignment="Left" Dock="Fill" Padding="15,5,0,0" />
+				</DockPanel>
+				<Rectangle Color="color2" Height="1" Alignment="Bottom"/>
+			</Panel>
+			<ScrollView>
+				<Panel >
+					<ColumnLayout ColumnCount="3" />
+					<Each Items="{userPhotos}">
+						<Panel Margin="3" Background="#eee" ux:Name="entry">
+							<Image StretchMode="UniformToFill" File="{path}" />
+							<Clicked Handler="{goToPhotoScore}"/>
+						</Panel>
+					</Each>
+				</Panel>
+			</ScrollView>
+		</StackPanel>
+	</Page>
+</Panel>

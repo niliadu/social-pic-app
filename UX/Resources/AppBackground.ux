@@ -1,0 +1,9 @@
+<Panel>
+  <Panel ux:Class="AppBackground">
+    <!-- Background -->
+    <LinearGradient StartPoint="0,0" EndPoint="0,1" Opacity="0.95">
+      <GradientStop Offset="0" Color="color2" />
+      <GradientStop Offset="1" Color="color3" />
+    </LinearGradient>
+  </Panel>
+</Panel>

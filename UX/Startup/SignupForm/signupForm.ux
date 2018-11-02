@@ -1,0 +1,64 @@
+<Panel>
+	<DockPanel ux:Class="SignupFormView" Color="gray1">
+		<Router ux:Dependency="router" />
+
+		<JavaScript File="JS/signupForm.js" />
+
+		<BackHeader Title="Cadastro" ContentColor="color2"/>
+
+		<Grid Rows="2*, 5*, 2*" Width="78%" Height="90%" Dock="Fill">
+
+			<!-- Signup Info -->
+			<Medium Value="Os campos a seguir são de preenchimento obrigatório." MaxWidth="100%" TextWrapping="Wrap" TextColor="color2" FontSize="14" TextAlignment="Center" Alignment="Center"/>
+
+			<!-- Signup Data -->
+			<Grid ColumnCount="1" >
+				<DockPanel>
+					<DockPanel Offset="0,8">
+						<Icon Value="{icons.user}" Color="color2" Dock="Left" Alignment="Center"/>
+						<TextInput Value="{uname}" Font="Medium" FontSize="14" TextColor="color2" TextAlignment="Left" CaretColor="gray3" PlaceholderColor="gray2" PlaceholderText="nome de usuário" InputHint="Email" ActionStyle="Next" Dock="Fill" Padding="15,5,0,0"/>
+					</DockPanel>
+					<LightItalic Value="{vUname}" FontSize="12" TextAlignment="Center" TextColor="gray2" Dock="Bottom"/>
+					<Rectangle Color="color2" Height="1" Dock="Bottom"/>
+				</DockPanel>
+
+				<DockPanel>
+					<DockPanel Offset="0,8">
+						<Icon Value="{icons.email}" Color="color2" Dock="Left" Alignment="Center"/>
+						<TextInput Value="{email}" Font="Medium" FontSize="14" TextColor="color2" TextAlignment="Left" CaretColor="gray3" PlaceholderColor="gray2" PlaceholderText="e-mail" InputHint="Email" ActionStyle="Next" Dock="Fill" Padding="15,5,0,0"/>
+					</DockPanel>
+					<LightItalic Value="{vEmail}" FontSize="12" TextAlignment="Center" TextColor="gray2" Dock="Bottom"/>
+					<Rectangle Color="color2" Height="1" Dock="Bottom"/>
+				</DockPanel>
+
+				<DockPanel>
+					<DockPanel Offset="0,8">
+						<Icon Value="{icons.lock}" Color="color2" Dock="Left" Alignment="Center"/>
+						<TextInput Value="{password}" Font="Medium" FontSize="14" TextColor="color2" TextAlignment="Left" CaretColor="gray3" PlaceholderColor="gray2" PlaceholderText="senha" IsPassword="true" InputHint="Number" ActionStyle="Send" Dock="Fill" Padding="15,5,0,0"/>
+					</DockPanel>
+					<LightItalic Value="{vPassword}" FontSize="12" TextAlignment="Center" TextColor="gray2" Dock="Bottom"/>
+					<Rectangle Color="color2" Height="1" Dock="Bottom"/>
+				</DockPanel>
+
+				<DockPanel>
+					<DockPanel Offset="0,8">
+						<Icon Value="{icons.lock}" Color="color2" Dock="Left" Alignment="Center"/>
+						<TextInput Value="{cpassword}" Font="Medium" FontSize="14" TextColor="color2" TextAlignment="Left" CaretColor="gray3" PlaceholderColor="gray2" PlaceholderText="repetir senha" IsPassword="true" InputHint="Number" ActionStyle="Send" Dock="Fill" Padding="15,5,0,0"/>
+					</DockPanel>
+					<LightItalic Value="{vCpassword}" FontSize="12" TextAlignment="Center" TextColor="gray2" Dock="Bottom"/>
+					<Rectangle Color="color2" Height="1" Dock="Bottom"/>
+				</DockPanel>
+
+			</Grid>
+
+			<!-- Options -->
+			<StackPanel ContentAlignment="Center" ItemSpacing="20" >
+				<!-- SignUp Button -->
+				<CommonButton ButtonColor="color2" Label="REGISTRAR-SE" ContentColor="white" >
+					<Clicked Handler="{validateFields}"/>
+				</CommonButton>
+
+			</StackPanel>
+		</Grid>
+	</DockPanel>
+</Panel>

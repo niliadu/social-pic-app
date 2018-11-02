@@ -1,0 +1,53 @@
+<Panel>
+	<!-- Add Button -->
+	<Panel ux:Class="AddButtonObject" ux:Name="self" Alignment="BottomRight" Offset="-15" Icon="">
+		<string ux:Property="Icon"/>
+
+		<JavaScript>
+		var Observable = require ("FuseJS/Observable");
+		//var addBtn = require("addButton");
+		var constants = require("JS/constants");
+		var routerCalls = require("routerCalls");
+
+		var isVisible = Observable(false);
+		var icon = constants.icons.addPhoto;
+		var groupId = null;
+pushToPostPhoto();
+		// addBtn.on("onValueChange", function(visibility, gId){
+		// 	isVisible.value = visibility;
+		// 	groupId = gId;
+		// });
+
+		function pushToPostPhoto(e){
+			routerCalls.send({
+				router : "main",
+				to:"postPhoto", 
+				type : "push", 
+				data : {groupId : groupId}
+			});
+		}
+
+		module.exports = {
+			isVisible : isVisible,
+			icon : icon,
+			pushToPostPhoto : pushToPostPhoto
+		}
+		</JavaScript>
+
+		<Circle ux:Name="colorCircle" Color="color2" Width="50" Height="50" >
+			<Icon ux:Name="icon" Value="{icon}" FontSize="30" TextAlignment="Center" Alignment="Center" Color="white"/>
+
+			<WhilePressed>
+				<Change colorCircle.Color="color3" Duration="0.1" />
+			</WhilePressed>
+
+			<Clicked Handler="{pushToPostPhoto}" />
+		</Circle>
+
+		<WhileFalse Value="{isVisible}">
+			<Scale Target="self" Factor="0" Duration="0.2" Easing="CircularInOut"/>
+			<Change self.Opacity="0" Duration="0.2" Easing="CircularInOut"/>
+		</WhileFalse>
+	</Panel>
+
+</Panel>

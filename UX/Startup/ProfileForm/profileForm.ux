@@ -1,0 +1,90 @@
+<Panel>
+	<Page ux:Class="ProfileFormView" Color="gray1">
+		<Router ux:Dependency="router"/>
+
+		<JavaScript File="JS/profileForm.js" />
+		<ComboBox ux:Name="Combobox"/>
+
+		<Grid Rows="1*, 5*, 2*" Width="78%" Height="90%">
+
+			<!-- Profile Info -->
+			<Medium Value="Precisamos de mais algumas informações para completar seu cadastro." MaxWidth="100%" TextWrapping="Wrap" TextColor="color2" FontSize="14" TextAlignment="Center" Alignment="Center"/>
+
+			<!-- Profile Data -->
+			<Grid ColumnCount="1" >
+				<!-- Name -->
+				<Panel>
+					<DockPanel Offset="0,8">
+						<TextInput Value="{fullname}" Font="Medium" FontSize="14" TextColor="color2" TextAlignment="Left" CaretColor="gray3" PlaceholderColor="gray2" PlaceholderText="Nome completo" ActionStyle="Next" Dock="Fill" Padding="15,5,0,0"/>
+					</DockPanel>
+
+					<Rectangle Color="color2" Height="1" Alignment="Bottom"/>
+				</Panel>
+
+				<!-- Birhday -->
+				<Panel>
+					<DockPanel Offset="0,8">
+						<TextInput Value="{birthday}" ValueChanged="{onBirthdayChange}" Font="Medium" FontSize="14" TextColor="color2" TextAlignment="Left" MaxLength="10" CaretColor="gray3" PlaceholderColor="gray2" PlaceholderText="Data de nascimento" ActionStyle="Next" Dock="Fill" Padding="15,5,0,0"/>
+					</DockPanel>
+
+					<Rectangle Color="color2" Height="1" Alignment="Bottom"/>
+				</Panel>
+
+				<!-- Gender -->
+				<ComboBoxBtn HasValue="{hasGender}" Placeholder="{selectedGender.name}" >
+					<Clicked>
+						<Set Combobox.Options="{genderOptions}" />
+						<Set Combobox.Selected="{selectedGender}" />
+						<Set Combobox.IsOpen="true" />
+					</Clicked>
+
+					<Rectangle Color="color2" Height="1" Alignment="Bottom"/>
+				</ComboBoxBtn>
+
+				<!-- Country -->
+				<ComboBoxBtn HasValue="{hasCountry}" Placeholder="{selectedCountry.name}" >
+					<Clicked>
+						<Set Combobox.Options="{countryOptions}" />
+						<Set Combobox.Selected="{selectedCountry}" />
+						<Set Combobox.IsOpen="true" />
+					</Clicked>
+
+					<Rectangle Color="color2" Height="1" Alignment="Bottom"/>
+				</ComboBoxBtn>
+
+				<!-- State -->
+				<Panel>
+					<DockPanel Offset="0,8">
+						<TextInput Value="{state}" Font="Medium" FontSize="14" TextColor="color2" TextAlignment="Left" MaxLength="10" CaretColor="gray3" PlaceholderColor="gray2" PlaceholderText="Estado" ActionStyle="Next" Dock="Fill" Padding="15,5,0,0"/>
+					</DockPanel>
+
+					<Rectangle Color="color2" Height="1" Alignment="Bottom"/>
+				</Panel>
+
+				<!-- City -->
+				<Panel>
+					<DockPanel Offset="0,8">
+						<TextInput Value="{city}" Font="Medium" FontSize="14" TextColor="color2" TextAlignment="Left" CaretColor="gray3" PlaceholderColor="gray2" PlaceholderText="Cidade" ActionStyle="Next" Dock="Fill" Padding="15,5,0,0"/>
+					</DockPanel>
+					<Rectangle Color="color2" Height="1" Alignment="Bottom"/>
+				</Panel>
+			</Grid>
+
+			<!-- Options -->
+			<StackPanel ContentAlignment="Bottom" ItemSpacing="20" >
+				<!-- Confirm Button -->
+				<CommonButton ButtonColor="color2" Label="CONFIRMAR" ContentColor="white" >
+					<Clicked Handler="{completaCadastro}"/>
+				</CommonButton>
+
+				<!-- Skip -->
+				<StackPanel Orientation="Horizontal" ContentAlignment="Center">
+					<Medium Value="Pular esta etapa >" TextColor="color2" FontSize="14" TextAlignment="Center" Alignment="Center" Padding="10,0,0,0" >
+						<Clicked Handler="{jumpStep}"/>
+					</Medium>
+				</StackPanel>
+			</StackPanel>
+		</Grid>
+
+	</Page>
+</Panel>

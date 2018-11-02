@@ -1,0 +1,9 @@
+<Page HitTestMode="LocalVisualAndChildren" >
+	<!-- Startup Navigator -->
+	<Navigator DefaultPath="login">
+		<LoginView ux:Template="login" router="mainRouter" />
+		<SignupFormView ux:Template="signupForm" router="mainRouter" />
+		<ProfileFormView ux:Template="profileForm" router="mainRouter" />
+		<PasswordRecoveryView ux:Template="passwordRecovery" router="mainRouter" />
+	</Navigator>
+</Page>

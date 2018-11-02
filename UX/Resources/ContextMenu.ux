@@ -1,0 +1,109 @@
+<Panel>
+   <Panel ux:Class="ContextMenu" Width="100%" Height="100%" IconSize="24" ContentColor="gray2">
+     <float ux:Property="Size"/>
+     <object ux:Property="Selected"/>
+     <object ux:Property="Options"/>
+
+     <float4 ux:Property="ContentColor"/>
+     <float ux:Property="IconSize"/>
+
+     <JavaScript>
+        var Observable = require ("FuseJS/Observable");
+        var icons = require ("JS/constants").icons;
+        var addButton = require ("addButton");
+        var pAddBtnStatus;
+
+        var isOpen = Observable(false);
+        function toggleCombobox () {
+          isOpen.value = !isOpen.value;
+
+          if (isOpen.value) {
+            if (addButton.isVisible()) {
+              pAddBtnStatus = true;
+              addButton.set(false)
+            }
+          } else {
+            if (pAddBtnStatus) {
+              addButton.set(true)
+            }
+          }
+        }
+
+        var self = this;
+        var options = self.Options.inner();
+
+        var icon = Observable (function() {
+          return isOpen.value ? icons.close : icons.cMenu;
+        });
+
+        module.exports = {
+          icon : icon,
+
+          toggleCombobox : toggleCombobox,
+          isOpen : isOpen,
+
+           options : options.map(function(option){
+              return {
+                 title : option.name,
+                 value : option.val,
+                 clicked : function (e) {
+                       self.Selected.value.value = option.val;
+                       isOpen.value = false;
+                 }
+              }
+           })
+        }
+     </JavaScript>
+
+    <!-- Button -->
+    <IconButton.Action Icon="{icon}" IconColor="{Property this.ContentColor}" IconSize="{Property this.IconSize}" Alignment="TopRight">
+      <Clicked Handler="{toggleCombobox}" />
+      <Rectangle ux:Name="btn_bg" Color="gray1" Opacity="1" />
+    </IconButton.Action>
+
+    <!-- ComboBox -->
+    <!-- Dropdown -->
+    <StackPanel ux:Name="dropdown" Width="180" Alignment="Right" >
+      <Panel Height="{Property this.Size}" />
+
+      <Panel Height="12" Color="gray1"/>
+      <Each Items="{options}">
+        <Match String="{title}">
+          <Case String="div">
+            <!-- Line -->
+            <Div.Simple ContentColor="{Property this.ContentColor}" Color="gray1"/>
+          </Case>
+          <Case String="" IsDefault="true">
+            <Panel ux:Name="item" Padding="14,0,14,0" Color="gray1" Height="30" HitTestMode="LocalBounds">
+              <!-- label -->
+              <Medium Value="{title}" FontSize="14" Color="{Property this.ContentColor}" TextAlignment="Center" Alignment="Center"/>
+
+              <!-- BG -->
+              <Rectangle Width="100%" Height="100%" ux:Name="item_bg" Color="white" Opacity="0" />
+
+              <Clicked Handler="{clicked}" />
+              <WhilePressed>
+                <Change item_bg.Opacity="0.2" DurationBack="0.1" Easing="CubicOut" />
+              </WhilePressed>
+            </Panel>
+          </Case>
+        </Match>
+      </Each>
+
+      <Panel Height="12" Color="gray1"/>
+    </StackPanel>
+
+    <!-- Background -->
+    <Panel ux:Name="bg" HitTestMode="LocalBounds" Color="black" Opacity="0.2" >
+      <Clicked Handler="{toggleCombobox}" />
+    </Panel>
+
+    <WhileFalse Value="{isOpen}">
+      <Change btn_bg.Opacity="0" Duration="0.05" />
+      <Change bg.Opacity="0" Duration="0.05" />
+      <Change bg.Visibility="Hidden" Delay="0.05"/>
+      <Change dropdown.Opacity="0" Duration="0.05" />
+      <Change dropdown.Visibility="Hidden" Delay="0.05"/>
+    </WhileFalse>
+  </Panel>
+</Panel>

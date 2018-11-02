@@ -1,0 +1,49 @@
+<Panel>
+  <DockPanel ux:Class="ConfigTools.Switch" Height="40" LabelColor="gray2" PrimaryColor="color2" SecondaryColor="gray2" Padding="8,8,0,8" HitTestMode="LocalBounds">
+    <object ux:Property="Value" />
+    <float4 ux:Property="LabelColor" />
+		<string ux:Property="Label" />
+
+    <float4 ux:Property="PrimaryColor" />
+    <float4 ux:Property="SecondaryColor" />
+
+    <JavaScript>
+      var Observable = require ("FuseJS/Observable");
+
+      var self = this;
+      var currentValue = self.Value.inner();
+
+      var color1 = self.PrimaryColor.value;
+      var color2 = self.SecondaryColor.value;
+
+      function clicked () {
+        currentValue.value = !currentValue.value;
+
+        self.Value.value.value = currentValue.value;
+      }
+
+      module.exports = {
+        clicked : clicked,
+        currentValue : currentValue,
+        color1 : color1,
+        color2 : color2
+      }
+    </JavaScript>
+
+    <Rectangle ux:Name="sBase" Width="58" Dock="Right" Alignment="Center" Color="{color1}" Padding="3" CornerRadius="30" >
+      <Circle ux:Name="sHandler" Width="20" BoxSizing="FillAspect" Color="gray1" Alignment="Right"/>
+    </Rectangle>
+
+    <!-- Title -->
+    <Medium Value="{Property this.Label}" FontSize="14" Color="{Property this.LabelColor}" TextAlignment="Left" Alignment="CenterLeft" />
+    <!-- SubTitle -->
+
+    <Clicked Handler="{clicked}" />
+
+    <WhileFalse Value="{currentValue}">
+      <Change sBase.Color="{color2}" Duration="0.2" />
+      <Move Target="sHandler" X="-34" Duration="0.3" Easing="CircularInOut"/>
+    </WhileFalse>
+
+  </DockPanel>
+</Panel>

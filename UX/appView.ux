@@ -1,0 +1,24 @@
+<Panel Dock="Fill">
+  <Alert ux:Name="AlertBox"/>
+
+  <!-- Splash Screen -->
+  <WhileFalse Value="{hideSplash}">
+    <ux:Include File="splashScreen.ux"/>
+  </WhileFalse>
+
+  <WhileTrue Value="{hideSplash}">
+    <!-- Router -->
+    <Router ux:Name="mainRouter"/>
+    <JavaScript File="JS/mainRouter.js" />
+    
+    <WhileFalse Value="{isLogged}">
+      <ux:Include File="Startup/startup.ux" />
+    </WhileFalse>
+
+    <WhileTrue Value="{isLogged}">
+      <ux:Include File="Main/main.ux" />
+    </WhileTrue>
+
+  </WhileTrue>
+
+</Panel>

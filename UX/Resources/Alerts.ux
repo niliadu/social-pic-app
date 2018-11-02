@@ -1,0 +1,34 @@
+<Panel>
+   <Panel ux:Class="Alert" HitTestMode="None" Alignment="Bottom" >
+      <JavaScript>
+         var Observable = require ("FuseJS/Observable");
+         var popup = require("alertPopup");
+         
+         var canShowAlert = Observable(false);
+         var messageAlert = Observable("");
+
+         popup.on("alertPopupChange", function(text, vis){
+            canShowAlert.value = vis;
+            messageAlert.value = text;
+         });
+         
+
+         module.exports = {
+            canShowAlert : canShowAlert,
+            messageAlert : messageAlert
+         }
+      </JavaScript>
+
+      <Panel ux:Name="alertArea" Color="color1" Width="100%" MinHeight="60">
+         <Panel Padding="10" Width="100%" Height="100%">
+            <Medium FontSize="14" Color="white" Value="{messageAlert}" Alignment="Center" TextAlignment="Center"/>
+         </Panel>
+         <Rectangle Color="color2" Alignment="Top" Width="100%" Height="2" />
+      </Panel>
+
+      <WhileFalse Value="{canShowAlert}">
+         <Move Target="alertArea" Y="1" RelativeTo="Size" Duration="0.2" Easing="CubicIn"/>
+         <Change this.Visibility="Hidden" Delay="0.2" />
+      </WhileFalse>
+   </Panel>
+</Panel>

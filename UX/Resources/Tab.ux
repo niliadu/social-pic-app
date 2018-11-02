@@ -1,0 +1,58 @@
+<!-- Tab Class -->
+<Panel>
+   <Panel ux:Class="Tab" Alignment="Center" Height="100%" Width="100%" HitTestMode="LocalBounds">
+      <object ux:Property="CurrentView" />
+      <string ux:Property="ViewID"/>
+
+      <string ux:Property="Title" />
+      <string ux:Property="Icon"/>
+
+      <float4 ux:Property="IdleColor"/>
+      <float4 ux:Property="ActiveColor"/>
+
+      <JavaScript>
+         var Observable = require ("FuseJS/Observable");
+
+         var self = this;
+
+         var current = self.CurrentView.inner();
+         var id = self.ViewID.value;
+
+         var activeColor = self.ActiveColor.value;
+         var idleColor = Observable (self.IdleColor.value);
+
+         var activeSelf = Observable(function() { return current.value == id; });
+
+         function onClick () {
+            if(current instanceof Observable)
+               self.CurrentView.value.value = id;
+         }
+
+         module.exports = {
+            onClick : onClick,
+            activeSelf : activeSelf,
+            activeColor : activeColor,
+            idleColor : idleColor
+         }
+      </JavaScript>
+
+      <Clicked Handler="{onClick}" />
+
+      <StackPanel ContentAlignment="Center" ItemSpacing="3" Dock="Fill">
+         <!-- <Image ux:Name="icon" Source="{Property this.Icon}" Height="28" Color="{idleColor}"/> -->
+         <Icon ux:Name="icon" Value="{Property this.Icon}" TextAlignment="Center" Alignment="Center" Color="{idleColor}"/>
+         <Light ux:Name="label" Value="{Property this.Title}" FontSize="12" TextColor="{idleColor}" TextAlignment="Center" />
+      </StackPanel>
+
+      <Panel ux:Name="bg" Color="gray1" Opacity="0"/>
+
+      <WhileTrue Value="{activeSelf}">
+         <Change icon.Color="{activeColor}" Duration="0.2" />
+         <Change label.Color="{activeColor}" Duration="0.2" />
+      </WhileTrue>
+
+      <WhilePressed>
+         <Change bg.Opacity="0.2" DurationBack="0.1" />
+      </WhilePressed>
+   </Panel>
+</Panel>

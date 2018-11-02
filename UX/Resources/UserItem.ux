@@ -1,0 +1,167 @@
+<Panel>
+  <!-- Item Module -->
+  <Panel ux:Class="UserItem.Module" HitTestMode="LocalBounds" ContentColor="gray3" LabelSize="12" IconSize="22">
+    <object ux:Property="Picture" />
+    <string ux:Property="Nickname" />
+
+    <float4 ux:Property="ContentColor" />
+    <int ux:Property="LabelSize" />
+    <int ux:Property="IconSize" />
+
+    <JavaScript>
+    var Observable = require ("FuseJS/Observable");
+    var constants = require("JS/constants");
+
+    var picture = this.Picture.inner();
+
+    module.exports = {
+      picture : picture,
+      icon : constants.icons.uCircle
+    }
+    </JavaScript>
+
+    <Grid Rows="4*,1*" Padding="8">
+      <!-- Photo -->
+      <Panel Padding="5" >
+        <Circle Color="gray2" BoxSizing="FillAspect">
+          <Stroke Width="2" Alignment="Center" Color="{Property this.ContentColor}" />
+
+          <!-- Pressed FX -->
+          <Circle ux:Name="fx" Color="white" Opacity="0" />
+
+          <!-- Use Picture Property -->
+          <Circle>
+            <ImageFill File="{picture}" StretchMode="UniformToFill" />
+          </Circle>
+
+          <!-- <Icon Value="{icon}" FontSize="{Property this.IconSize}" Color="white" Alignment="Center" > -->
+        </Circle>
+      </Panel>
+
+      <!-- Name -->
+      <Medium Value="{Property this.Nickname}" Color="{Property this.ContentColor}" FontSize="{Property this.LabelSize}" Alignment="Center" TextAlignment="Center" TextWrapping="Wrap"/>
+    </Grid>
+
+    <WhilePressed>
+     <Change fx.Opacity="0.2" DurationBack="0.1"/>
+   </WhilePressed>
+
+   <!-- placeholder -->
+   <Image Source="img_placeholder" StretchMode="Uniform" Opacity="0"/>
+ </Panel>
+
+ <!-- Item List -->
+ <Panel ux:Class="UserItem.List" HitTestMode="LocalBounds" ContentColor="gray3" LabelSize="12" IconSize="22">
+  <object ux:Property="Picture" />
+  <string ux:Property="Nickname" />
+
+  <float4 ux:Property="ContentColor" />
+  <int ux:Property="LabelSize" />
+  <int ux:Property="IconSize" />
+
+  <JavaScript>
+  var Observable = require ("FuseJS/Observable");
+  var constants = require("JS/constants");
+
+  var picture = this.Picture.inner();
+  var sourceBool = (this.Picture.value.indexOf("http") !== -1);
+  var teste = this;
+  module.exports = {
+    picture : picture,
+    icon : constants.icons.uCircle,
+    obj : teste,
+    sourceBool : sourceBool
+  }
+  </JavaScript>
+
+  <DockPanel Padding="8">
+    <!-- Photo -->
+    <Circle Color="gray2" Height="100%" BoxSizing="FillAspect" Dock="Left">
+      <Stroke Width="2" Alignment="Center" Color="{Property this.ContentColor}" />
+      <!-- Pressed FX -->
+      <Circle ux:Name="fx" Color="white" Opacity="0" />
+
+      
+      <WhileTrue Value="{sourceBool}">
+        <Circle>
+          <ImageFill Url="{picture}" StretchMode="UniformToFill" />
+        </Circle>
+      </WhileTrue>
+      <WhileFalse Value="{sourceBool}">
+        <Circle>
+          <ImageFill File="{picture}" StretchMode="UniformToFill" />
+        </Circle>
+      </WhileFalse>
+
+      <!-- <Icon Value="{icon}" FontSize="22" Color="white" Alignment="Center" /> -->
+    </Circle>
+
+    <Panel Width="8" Dock="Left" />
+
+    <!-- Name -->
+    <Medium Value="{Property this.Nickname}" Color="{Property this.ContentColor}" FontSize="{Property this.LabelSize}" Dock="Fill" TextAlignment="Left" TextWrapping="Wrap"/>
+  </DockPanel>
+
+  <WhilePressed>
+   <Change fx.Opacity="0.2" DurationBack="0.1"/>
+ </WhilePressed>
+
+ <!-- placeholder -->
+ <Image Source="img_placeholder" StretchMode="Uniform" Opacity="0"/>
+</Panel>
+
+<!-- Avatar Only -->
+<Panel ux:Class="UserItem.Avatar" HitTestMode="LocalBounds">
+  <object ux:Property="Picture" />
+  <float4 ux:Property="ContentColor" />
+
+  <JavaScript>
+  var Observable = require ("FuseJS/Observable");
+  var constants = require("JS/constants");
+
+  var picture = this.Picture.inner();
+
+  module.exports = {
+    picture : picture,
+    icon : constants.icons.uCircle
+  }
+  </JavaScript>
+
+  <!-- Photo -->
+  <Circle Color="gray2" BoxSizing="FillAspect" >
+    <Stroke Width="2" Alignment="Center" Color="{Property this.ContentColor}" />
+    <!-- Pressed FX -->
+    <Circle ux:Name="fx" Color="white" Opacity="0" />
+
+    <Circle>
+      <ImageFill File="{picture}" StretchMode="UniformToFill" />
+    </Circle>
+
+    <!-- <Icon Value="{icon}" FontSize="22" Color="white" Alignment="Center" /> -->
+  </Circle>
+
+  <Image Source="img_placeholder" StretchMode="Uniform" Opacity="0"/>
+
+  <WhilePressed>
+   <Change fx.Opacity="0.2" DurationBack="0.1"/>
+ </WhilePressed>
+</Panel>
+
+<!-- Show Amount -->
+<Panel ux:Class="UserItem.ShowAmount" HitTestMode="LocalBounds">
+  <int ux:Property="Amount" />
+  <float4 ux:Property="ContentColor" />
+
+  <JavaScript>
+  module.exports.amount = "+" + this.Amount.value;
+  </JavaScript>
+
+  <!-- Photo -->
+  <Circle Width="100%" Height="100%" Color="gray1">
+    <Stroke Width="2" Alignment="Center" Color="{Property this.ContentColor}" />
+    <Bold Value="{amount}" FontSize="13" Alignment="Center" TextAlignment="Center" Color="gray2" Offset="-2,0" />
+  </Circle>
+
+  <Image Source="img_placeholder" StretchMode="Uniform" Opacity="0"/>
+</Panel>
+</Panel>

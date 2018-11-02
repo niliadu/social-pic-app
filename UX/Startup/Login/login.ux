@@ -1,0 +1,89 @@
+<Panel>
+	<Page ux:Class="LoginView" >
+		<Router ux:Dependency="router" />
+
+		<JavaScript File="JS/login.js" />
+
+		<Grid Rows="6*, 6*, 8*" Padding="0,20,0,0" Width="78%">
+
+			<!-- App Logo -->
+			<StackPanel ItemSpacing="8" Alignment="Center" >
+				<Image Source="img_appLogo" Width="100" Height="100" Alignment="Center">
+					<!-- <Clicked Handler="{forceLogin}"/> -->
+				</Image>
+				<Medium Value="InCloset" FontSize="14" TextColor="white" TextAlignment="Center" />
+			</StackPanel>
+
+			<!-- Login Info -->
+			<Grid Rows="3*, 3*, 5*" CellSpacing="5" >
+				<Panel>
+					<DockPanel Offset="0,8">
+						<Icon Value="{icons.user}" Dock="Left" />
+						<TextInput Font="Medium" FontSize="14" TextColor="white" TextAlignment="Left" CaretColor="white" PlaceholderColor="fadeWhite" PlaceholderText="nome de usuário ou e-mail" InputHint="Email" ActionStyle="Next" Dock="Fill" Padding="15,5,0,0" Value="{userLogin}"/>
+					</DockPanel>
+					<Rectangle Color="white" Height="1" Alignment="Bottom"/>
+				</Panel>
+				<Panel>
+					<DockPanel Offset="0,8">
+						<Icon Value="{icons.lock}" Dock="Left" />
+						<TextInput Font="Medium" FontSize="14" TextColor="white" TextAlignment="Left" CaretColor="white" PlaceholderColor="fadeWhite" PlaceholderText="senha" IsPassword="true" InputHint="Default" ActionStyle="Done" Dock="Fill" Padding="15,5,0,0" Value="{passLogin}" ActionTriggered="{checkLogin}">
+							<TextInputActionTriggered>
+								<ReleaseFocus />
+							</TextInputActionTriggered>
+						</TextInput>
+					</DockPanel>
+					<Rectangle Color="white" Height="1" Alignment="Bottom"/>
+				</Panel>
+
+				<!-- Options -->
+				<Grid RowCount="2">
+					<!-- ForgotPassword -->
+					<Panel Alignment="TopRight" HitTestMode="LocalBounds" >
+						<Light Value="Esqueceu a senha?" Offset="0,4" TextColor="white" FontSize="13" TextAlignment="Right" />
+						<Clicked Handler="{goToPasswordRecovery}"/>
+					</Panel>
+
+					<!-- StayConnected -->
+					<BtnToggle Alignment="Center" Offset="0,10" Label="Permanecer conectado" Target="{stayConnected}">
+						<Clicked Handler="{toggleStayConnected}"/>
+					</BtnToggle>
+				</Grid>
+			</Grid>
+
+			<!-- Buttons -->
+			<Panel>
+				<Grid Rows="4*,2*,4*,5*" Padding="0,10,0,0">
+					<CommonButton ButtonColor="white" Label="ENTRAR" ContentColor="gray3" >
+						<Clicked Handler="{checkLogin}"/>
+					</CommonButton>
+
+					<Medium Value="OU" FontSize="14" TextColor="white" TextAlignment="Center" Alignment="Center" />
+
+					<Rectangle Width="100%" Height="50" Color="fbColor" CornerRadius="50">
+						<StackLayout Orientation="Horizontal" ContentAlignment="Center"/>
+						<Medium Value="ENTRAR COM" Color="white" FontSize="14" TextAlignment="Center" Alignment="Center" />
+						<Bold Value="facebook" Color="white" FontSize="20" TextAlignment="Center" Alignment="Center" Padding="10,0,0,4" />
+						<Clicked/>
+					</Rectangle>
+
+					<StackPanel Orientation="Horizontal" ContentAlignment="Center">
+						<Medium Value="Ainda não tem uma conta?" TextColor="white" FontSize="14" TextAlignment="Center" Alignment="Center"/>
+						<Medium Value="Registre-se!" TextColor="white" FontSize="14" TextAlignment="Center" Alignment="Center" Padding="10,0,0,0" >
+							<Rectangle Color="white" Height="1" Alignment="Bottom" Offset="-5,0" />
+							<Clicked Handler="{goToSignupForm}"/>
+						</Medium>
+					</StackPanel>
+				</Grid>
+			</Panel>
+		</Grid>
+
+		<!-- Background -->
+		<Panel Color="gray2">
+			<!-- BG Color -->
+			<AppBackground/>
+			<!-- Video -->
+			<Video Source="loginVideo" IsLooping="true" AutoPlay="true" StretchMode="UniformToFill" />
+		</Panel>
+
+	</Page>
+</Panel>

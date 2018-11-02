@@ -1,0 +1,14 @@
+<Panel>
+  <Panel ux:Class="BackHeader" Height="40" Dock="Top" ContentColor="gray2">
+    <string ux:Property="Title"/>
+    <float4 ux:Property="ContentColor"/>
+
+    <IconButton.Action Icon="&#xE5CB;" IconColor="{Property this.ContentColor}" Alignment="Left" >
+      <Clicked Handler="{goBack}"/>
+    </IconButton.Action>
+
+    <Medium Value="{Property this.Title}" FontSize="14" TextColor="{Property this.ContentColor}" Alignment="Center" HitTestMode="None" />
+
+    <Rectangle Width="100%" Height="1" Color="{Property this.ContentColor}" Alignment="Bottom" HitTestMode="None" Opacity="0.5"/>
+  </Panel>
+</Panel>

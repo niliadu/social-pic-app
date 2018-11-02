@@ -1,0 +1,10 @@
+<Panel>
+  <DockPanel ux:Class="AboutView" Color="gray1">
+    <Router ux:Dependency="Router" />
+
+    <JavaScript File="JS/about.js" />
+
+    <BackHeader Title="Sobre"/>
+
+  </DockPanel>
+</Panel>

@@ -1,0 +1,33 @@
+<Panel>
+	<DockPanel ux:Class="PhotoScoreView" Color="gray1">
+		<Router ux:Dependency="Router" />
+
+		<JavaScript File="JS/photoScore.js" />
+		<ComboBox ux:Name="Combobox"/>
+		<BackHeader Title="{titlePhoto}" />
+
+		<Grid Rows="6*,4*" Padding="20" Dock="Fill">
+
+			<!-- Profile Picture -->
+			<Image File="{photo}" StretchMode="UniformToFill" />
+
+			<Grid Rows="3*,7*" CellSpacing="12" >
+				<!-- Title -->
+				<Panel>
+					<DockPanel Offset="0,8">
+						<Icon Value="{icons.star}" Color="color2" Dock="Left" Alignment="Center"/>
+						<Text Value="{photoAverageScore}" Font="Medium" FontSize="18" TextColor="color2" TextAlignment="Left" Dock="Fill" Alignment="Bottom" Padding="12,8"/>
+					</DockPanel>
+					<Rectangle Color="gray2" Height="1" Alignment="Bottom"/>
+				</Panel>
+				<StackPanel Orientation="Horizontal" Alignment="Center" ContentAlignment="Center">
+					<Each Items="{stars}">
+						<Icon Value="{star}" FontSize="40" Color="color2" TextAlignment="Center" Alignment="Center">
+							<Clicked Handler="{saveScore}"/>
+						</Icon>
+					</Each>
+				</StackPanel>
+			</Grid>
+		</Grid>
+	</DockPanel>
+</Panel>

@@ -1,0 +1,85 @@
+<Panel>
+  <!-- Module Item -->
+  <Panel ux:Class="GroupItem.Module" Color="gray1b">
+    <string ux:Property="Title" />
+    <string ux:Property="News" />
+    <FileSource ux:Property="Image"/>
+
+    <!-- Notifications -->
+    <Match String="{Property this.News}">
+      <Case String="0"/>
+      <Case String="1" IsDefault="true">
+        <Circle Width="18" Height="18" Color="color2" Alignment="TopLeft" Offset="-3, -3" >
+          <Stroke Width="2" Color="white" Alignment="Outside"/>
+          <Bold Value="{Property this.News}" FontSize="12" Color="white" TextAlignment="Center" Alignment="Center" />
+        </Circle>
+      </Case>
+    </Match>
+
+    <!-- Pressed FX -->
+    <Panel ux:Name="pressFX" Color="white" Opacity="0" >
+      <WhilePressed>
+        <Change pressFX.Opacity="0.3" DurationBack="0.1" />
+      </WhilePressed>
+    </Panel>
+
+    <!-- Class -->
+    <Grid Rows="8*,2*" Padding="4">
+      <Image File="{Property this.Image}" StretchMode="UniformToFill" />
+      <Panel Padding="8,0">
+        <Medium Value="{Property this.Title}" FontSize="14" Color="gray2" Alignment="Center" />
+      </Panel>
+    </Grid>
+
+    <!-- BG -->
+    <Image Source="img_placeholder" StretchMode="UniformToFill" Opacity="0"/>
+  </Panel>
+
+  <!-- List Item -->
+  <Panel ux:Class="GroupItem.List" Height="50" Color="gray1b">
+    <string ux:Property="Title" />
+    <string ux:Property="News" />
+    <FileSource ux:Property="Image"/>
+
+    <!-- Notifications -->
+    <Match String="{Property this.News}">
+      <Case String="0"/>
+      <Case String="1" IsDefault="true">
+        <Circle Width="18" Height="18" Color="color2" Alignment="TopLeft" Offset="-3, -3" >
+          <Stroke Width="2" Color="white" Alignment="Outside"/>
+          <Bold Value="{Property this.News}" FontSize="12" Color="white" TextAlignment="Center" Alignment="Center" />
+        </Circle>
+      </Case>
+    </Match>
+
+    <!-- Pressed FX -->
+    <Panel ux:Name="pressFX" Color="white" Opacity="0" >
+      <WhilePressed>
+        <Change pressFX.Opacity="0.3" DurationBack="0.1" />
+      </WhilePressed>
+    </Panel>
+
+    <!-- Visuals -->
+    <DockPanel Padding="4">
+      <!-- Image -->
+      <Image Source="img_placeholder" StretchMode="Uniform" Dock="Left" >
+        <Panel Width="100%" Height="100%">
+          <ImageFill File="{Property this.Image}" StretchMode="UniformToFill" />
+        </Panel>
+      </Image>
+
+      <!-- Title -->
+      <Panel Padding="12,0" Dock="Fill">
+        <Medium Value="{Property this.Title}" FontSize="14" Color="gray2" Alignment="CenterLeft" />
+      </Panel>
+
+      <!-- Members -->
+      <StackPanel Height="85%" ItemSpacing="6" Orientation="Horizontal" Padding="8" Dock="Right">
+        <UserItem.Avatar Picture="avatar" ContentColor="white"/>
+        <UserItem.Avatar Picture="avatar" ContentColor="white"/>
+        <UserItem.ShowAmount Amount="22"/>
+      </StackPanel>
+    </DockPanel>
+
+  </Panel>
+</Panel>

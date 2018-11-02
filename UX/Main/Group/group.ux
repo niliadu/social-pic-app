@@ -1,0 +1,48 @@
+<Panel>
+	<Panel ux:Class="GroupView" Color="gray1">
+		<Router ux:Dependency="Router" />
+
+		<JavaScript File="JS/group.js" />
+		<ContextMenu Size="40" Options="{groupMenuOptions}" Selected="{groupSelectedOption}" />
+
+		<DockPanel>
+			<Panel Alignment="BottomRight" Offset="-15,-70">
+				<Circle ux:Name="colorCircle2" Color="color2" Width="50" Height="50" >
+					<Icon ux:Name="icon2" Value="{icons.addGroup}" FontSize="30" TextAlignment="Center" Alignment="Center" Color="white"/>
+
+					<WhilePressed>
+						<Change colorCircle2.Color="color3" Duration="0.1" />
+					</WhilePressed>
+
+					<Clicked Handler="{pushToPostPhotoGallery}" />
+				</Circle>
+			</Panel>
+			<Panel Alignment="BottomRight" Offset="-15">
+				<Circle ux:Name="colorCircle" Color="color2" Width="50" Height="50" >
+					<Icon ux:Name="icon" Value="{icon}" FontSize="30" TextAlignment="Center" Alignment="Center" Color="white"/>
+
+					<WhilePressed>
+						<Change colorCircle.Color="color3" Duration="0.1" />
+					</WhilePressed>
+
+					<Clicked Handler="{pushToPostPhoto}" />
+				</Circle>
+			</Panel>
+			<BackHeader Title="{groupName}"/>
+			<Tabs Options="{groupTabs}" Selected="{currentTab}" IdleColor="gray2" ActiveColor="color2"/>
+			<ScrollView Padding="12">
+				<StackPanel ItemSpacing="8">
+					<Each Items="{groupMembers}">
+						<Deferred>
+							<Panel>
+								<UserItem.List Height="40" Picture="{photo}" Nickname="{name}" Color="gray1b"/>
+								<Clicked Handler="{pushToProfile}" />
+							</Panel>
+						</Deferred>
+					</Each>
+				</StackPanel>
+			</ScrollView>
+			
+		</DockPanel>
+	</Panel>
+</Panel>

@@ -1,0 +1,28 @@
+{
+  "Name": "InCloset",
+  "RootNamespace":"",
+  "Packages": [
+    "Fuse",
+    "FuseJS",
+    "Fuse.UserEvents",
+    "Fuse.CameraRoll",
+    "Fuse.Camera",
+    "Fuse.ImageTools",
+    "Fuse.LocalNotifications",
+    "Fuse.UserEvents"
+  ],
+
+  "Mobile": {
+    "Orientations": "Portrait",
+    "KeepAlive": true,
+    "RunsInBackground": true,
+  },
+  "Icon": "Icon/iconIN_256.png",
+  "Includes": [
+    "./*.ux",
+    "JS/*.js:Bundle",
+    "UNO/*.uno",
+  ],
+  "VersionCount": 1,
+  "Version": "0.1.0"
+}

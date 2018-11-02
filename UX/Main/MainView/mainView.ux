@@ -1,0 +1,30 @@
+<Panel>
+	<Panel ux:Class="MainView" Color="gray1">
+		<Router ux:Dependency="Router" />
+
+		<JavaScript File="JS/mainView.js" />
+
+		<ux:Include File="header.ux" />
+
+		<DockPanel>
+			<!-- Fake Header -->
+			<Panel Height="40" Dock="Top" />
+
+			<!-- Tabs -->
+			<Tabs Options="{viewOptions}" Selected="{currentView}" IdleColor="gray2" ActiveColor="color2"/>
+
+			<Panel Dock="Fill">
+				<!-- Router -->
+				<Router ux:Name="mainViewRouter" />
+
+				<!-- Navigator -->
+				<PageView DefaultPath="groups">
+					<NewsView ux:Template="news" Router="mainViewRouter" />
+					<GroupsView ux:Template="groups" Router="mainViewRouter" />
+					<FriendsView ux:Template="friends" Router="mainViewRouter" />
+				</PageView>
+			</Panel>
+		</DockPanel>
+
+	</Panel>
+</Panel>

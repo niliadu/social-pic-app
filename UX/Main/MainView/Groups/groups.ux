@@ -1,0 +1,60 @@
+<Panel>
+	<Page ux:Class="GroupsView">
+		<Router ux:Dependency="Router" />
+
+		<JavaScript File="JS/groups.js" />
+		<Activated>
+			<Callback Handler="{updateGroupsInformation}"/>
+		</Activated>
+		<DockLayout/>
+
+		<!-- Layout Options -->
+		<!-- <Panel Dock="Top"> -->
+		<Panel Dock="Top" Color="gray1b">
+			<!-- <Rectangle Color="gray1b" Height="1" Alignment="Top"/> -->
+			<!-- <Rectangle Color="gray1b" Height="1" Alignment="Bottom"/> -->
+
+			<StackPanel Orientation="Horizontal" Alignment="Left">
+				<!-- Button View Module -->
+				<IconButton.Toggle ID="1" Selected="{layoutID}" Icon="{icons.lModule}" />
+				<!-- Button View List -->
+				<IconButton.Toggle ID="2" Selected="{layoutID}" Icon="{icons.lList}" />
+			</StackPanel>
+
+			<IconButton.Action Icon="{icons.addGroup}" IconColor="gray2" Alignment="Right" >
+				<Clicked Handler="{goToCreateGroup}" />
+			</IconButton.Action>
+		</Panel>
+
+		<!-- Groups -->
+		<ScrollView>
+			<Match Number="{layoutID}" >
+
+				<!-- Case Module Layout -->
+				<Case Number="1">
+					<GalleryGrid>
+						<Deferred>
+							<Each Items="{groups}">
+								<GroupItem.Module Title="{title}" Image="{img_path}" News="{nonSeen}" >
+									<Clicked Handler="{goToGroupPage}"/>
+								</GroupItem.Module>
+							</Each>
+						</Deferred>
+					</GalleryGrid>
+				</Case>
+
+				<!-- Case List Layout -->
+				<Case Number="2">
+					<StackPanel ItemSpacing="6" Padding="6" >
+						<Each Items="{groups}">
+							<GroupItem.List Title="{title}" Image="{img_path}" News="{nonSeen}" >
+								<Clicked Handler="{goToGroupPage}"/>
+							</GroupItem.List>
+						</Each>
+					</StackPanel>
+				</Case>
+
+			</Match>
+		</ScrollView>
+	</Page>
+</Panel>

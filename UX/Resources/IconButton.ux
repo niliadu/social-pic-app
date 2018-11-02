@@ -1,0 +1,63 @@
+<Panel>
+  <!-- Action Class -->
+  <Rectangle ux:Class="IconButton.Action" Width="40" Height="40" IconColor="gray2" IconSize="22" HitTestMode="LocalBounds">
+    <string ux:Property="Icon" />
+    <float4 ux:Property="IconColor"/>
+    <int ux:Property="IconSize"/>
+
+    <Icon ux:Name="icon" Value="{Property this.Icon}" FontSize="{Property this.IconSize}" Color="{Property this.IconColor}" TextAlignment="Center" Alignment="Center"/>
+    <Panel ux:Name="bg" Color="white" Opacity="0" />
+
+    <WhilePressed>
+      <Change bg.Opacity="0.1" DurationBack="0.1" />
+    </WhilePressed>
+  </Rectangle>
+
+  <!-- Toggle Class -->
+  <Rectangle ux:Class="IconButton.Toggle" Width="40" Height="40" HitTestMode="LocalBounds">
+    <int ux:Property="ID" />
+    <object ux:Property="Selected" />
+    <string ux:Property="Icon" />
+
+    <JavaScript>
+      var Observable = require("FuseJS/Observable");
+
+      var self = this;
+
+      var id = self.ID.value;
+      var isSelected = self.Selected.inner().map(function(value){
+        if (value === id) return true;
+
+        return false;
+      });
+
+      module.exports = {
+        id : id,
+        selected : self.Selected.inner(),
+
+        isSelected : isSelected,
+        onClick : function () {
+          if (self.Selected instanceof Observable)
+            self.Selected.value.value = id;
+        }
+      }
+    </JavaScript>
+
+    <Icon ux:Name="icon" Value="{Property this.Icon}" Color="gray2" TextAlignment="Center" Alignment="Center"/>
+    <Panel ux:Name="bg" Color="white" Opacity="0" />
+
+
+    <WhileTrue Value="{isSelected}">
+      <Change bg.Opacity="0.1" DurationBack="0.1" />
+      <Change icon.Color="color2" DurationBack="0.1" />
+    </WhileTrue>
+    <WhileFalse Value="{isSelected}">
+      <WhilePressed>
+        <Change bg.Opacity="0.1" DurationBack="0.1" />
+      </WhilePressed>
+      <Clicked Handler="{onClick}" />
+    </WhileFalse>
+
+  </Rectangle>
+
+</Panel>

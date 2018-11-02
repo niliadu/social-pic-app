@@ -1,0 +1,66 @@
+<Panel>
+  <Panel ux:Class="ConfigView" Color="gray1">
+    <Router ux:Dependency="Router" />
+
+    <JavaScript File="JS/config.js" />
+    <ux:Include File="ConfigTools.ux"/>
+
+    <ComboBox ux:Name="ConfigCombobox"/>
+
+    <DockPanel>
+      <BackHeader Title="Configurações"/>
+
+      <ScrollView UserScroll="false" Padding="20">
+        <StackPanel Dock="Fill" ItemSpacing="8">
+          <!-- General Options -->
+          <Div.Label Title="Geral" LabelColor="color2" ContentColor="color2" />
+
+          <Panel Height="12" />
+
+          <ConfigTools.Switch Value="{usePrivacy}" Label="Privacidade" />
+          <ConfigTools.Switch Value="{automaticDownloads}" Label="Download Automático" />
+          <ConfigTools.Switch Value="{commentsHighlights}" Label="Marcação em Comentários" />
+
+          <Panel Height="12" />
+
+          <!-- Alert Options -->
+          <Div.Label Title="Notificações" LabelColor="color2" ContentColor="color2" />
+
+          <Panel Height="12" />
+
+          <ConfigTools.Switch Value="{useAlerts}" Label="Exibir Notificações" />
+          <ConfigTools.Switch Value="{useVibratingAlerts}" Label="Vibrar" />
+
+          <StackPanel>
+            <ConfigTools.Switch Value="{useSoundAlerts}" Label="Alerta Sonoro" />
+            <WhileTrue Value="{useSoundAlerts}">
+              <ComboBoxBtn HasValue="{hasSound}" Placeholder="{selectedSound.name}" >
+                <Clicked>
+                  <Set ConfigCombobox.Options="{soundOptions}" />
+                  <Set ConfigCombobox.Selected="{selectedSound}" />
+                  <Set ConfigCombobox.IsOpen="true" />
+                </Clicked>
+              </ComboBoxBtn>
+            </WhileTrue>
+          </StackPanel>
+
+          <StackPanel>
+            <ConfigTools.Switch Value="{useVisualAlerts}" Label="Alerta Visual" />
+            <WhileTrue Value="{useVisualAlerts}">
+              <ComboBoxBtn HasValue="{hasVisual}" Placeholder="{selectedVisual.name}" >
+                <Clicked>
+                  <Set ConfigCombobox.Options="{visualOptions}" />
+                  <Set ConfigCombobox.Selected="{selectedVisual}" />
+                  <Set ConfigCombobox.IsOpen="true" />
+                </Clicked>
+              </ComboBoxBtn>
+            </WhileTrue>
+          </StackPanel>
+
+          <Panel Height="12" />
+
+        </StackPanel>
+      </ScrollView>
+    </DockPanel>
+  </Panel>
+</Panel>

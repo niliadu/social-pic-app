@@ -1,0 +1,7 @@
+<Panel>
+	<Page ux:Class="NewsView">
+		<Router ux:Dependency="Router" />
+
+		<Medium Value="News" Alignment="Center" TextAlignment="Center" />
+   </Page>
+</Panel>

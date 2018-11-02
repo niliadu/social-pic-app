@@ -1,0 +1,66 @@
+<Panel>
+	<!-- Add Button -->
+	<Panel ux:Class="AddButton">
+		<bool ux:Property="IsOpen" />
+		<bool ux:Property="SetVisible" />
+
+		<string ux:Property="Option1Label" />
+		<string ux:Property="Option2Label" />
+
+		<Panel Alignment="BottomRight" Offset="-15">
+			<Panel ux:Name="Icon" HitTestMode="None">
+				<Rectangle Color="white" Width="3%" Height="60%" />
+				<Rectangle Color="white" Width="60%" Height="3%" />
+			</Panel>
+
+			<Circle ux:Name="ColorCircle" Color="color2" Width="50" Height="50" >
+				<Clicked>
+					<Set this.IsOpen.Value="true" />
+				</Clicked>
+			</Circle>
+
+			<Circle Color="gray2" Width="50" Height="50" >
+				<Clicked>
+					<Set this.IsOpen.Value="false" />
+				</Clicked>
+			</Circle>
+
+			<Circle ux:Name="Option2" Color="color2" Width="56" Height="56" Opacity="0">
+				<Medium Value="{Property this.Option2Label}" FontSize="11" Color="white" LineSpacing="-4" TextAlignment="Center" TextWrapping="Wrap" Alignment="Center" Offset="0,-4"/>
+			</Circle>
+			<Circle ux:Name="Option1" Color="color2" Width="56" Height="56" Opacity="0">
+				<Medium Value="{Property this.Option1Label}" FontSize="11" Color="white" LineSpacing="-4" TextAlignment="Center" TextWrapping="Wrap" Alignment="Center" Offset="0,-4"/>
+			</Circle>
+
+			<WhileTrue Value="{Property this.IsOpen}">
+				<Rotate Target="Icon" Degrees="405" Duration="0.4" Easing="CircularInOut" />
+				<Change ColorCircle.Opacity="0" Duration="0.4" />
+				<Change ColorCircle.HitTestMode="None"/>
+				<Change BlackMaskCtrl.Value="true"/>
+
+				<Move Target="Option2" Y="-60" Duration="1.2" DurationBack="0.8" Easing="ElasticOut" Delay="0.1"/>
+				<Change Option2.Opacity="1" Duration="0.3" Easing="CircularInOut" Delay="0.1"/>
+
+				<Move Target="Option1" Y="-124" Duration="1.2" DurationBack="0.6" Easing="ElasticOut" Delay="0.15"/>
+				<Change Option1.Opacity="1" Duration="0.3" Easing="CircularInOut" Delay="0.1"/>
+			</WhileTrue>
+
+			<WhileFalse Value="{Property this.SetVisible}">
+				<Scale Factor="0" Duration="0.2" Easing="CircularInOut"/>
+				<Change this.Opacity="0" Duration="0.2" Easing="CircularInOut"/>
+			</WhileFalse>
+		</Panel>
+
+		<!-- Black Mask -->
+		<Panel ux:Name="blackMask" Color="black" Opacity="0" HitTestMode="None">
+			<Clicked>
+				<Set this.IsOpen.Value="false" />
+			</Clicked>
+		</Panel>
+
+		<WhileTrue ux:Name="BlackMaskCtrl">
+			<Change blackMask.Opacity="0.5" Duration="0.2"/>
+			<Change blackMask.HitTestMode="LocalBoundsAndChildren" />
+		</WhileTrue>
+	</Panel>
+</Panel>

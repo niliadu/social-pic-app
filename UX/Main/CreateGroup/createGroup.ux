@@ -1,0 +1,66 @@
+<Panel>
+  <DockPanel ux:Class="CreateGroupView" Color="gray1">
+    <Router ux:Dependency="Router" />
+
+    <JavaScript File="JS/createGroup.js" />
+
+    <BackHeader Title="Criar Grupo"/>
+
+    <DockPanel Dock="Fill" Padding="20,12">
+      <Grid Columns="3*,7*" Height="60" Dock="Top">
+        <!-- Choose Cover -->
+        <Panel BoxSizing="FillAspect">
+          <Image  Margin="0, 30, 0, 0" File="{groupImagePath}" />
+          <Clicked Handler="{choosePhoto}"/>
+        </Panel>
+
+        <!-- GroupName -->
+        <Panel>
+          <DockPanel Offset="0,8">
+            <TextInput Value="{groupname}" Font="Medium" FontSize="14" TextColor="color2" TextAlignment="Center" CaretColor="gray3" PlaceholderColor="gray1c" PlaceholderText="Escolha um nome para o grupo" ActionStyle="Next" Dock="Fill" Padding="15,5,0,0"/>
+          </DockPanel>
+
+          <Rectangle Color="color2" Height="1" Alignment="Bottom"/>
+        </Panel>
+      </Grid>
+
+      <!-- Search Users -->
+      <TextInput Dock="Top" PlaceholderText="Procure por usuários" PlaceholderColor="#ccc" Padding="20" Value="{infoSearch}" ValueChanged="{searchUser}" Alignment="TopCenter"/>
+
+      <!-- Show Users -->
+      <Grid Dock="Fill">
+        <!-- Searched Users -->
+        <ScrollView Padding="12">
+          <StackPanel ItemSpacing="8">
+            <Each Items="{searchResult}">
+              <Panel>
+                <UserItem.List Height="40" Picture="{photo}" Nickname="{name}" Color="gray1b"/>
+                <Clicked Handler="{addRemoveUser}" />
+              </Panel>
+            </Each>
+          </StackPanel>
+        </ScrollView>
+
+        <!-- Added Users -->
+        <ScrollView Padding="12">
+          <StackPanel ItemSpacing="8">
+            <Each Items="{selectedUsers}">
+              <Panel>
+                <UserItem.List Height="40" Picture="{photo}" Nickname="{name}" Color="gray1b"/>
+                <Clicked Handler="{addRemoveUser}" />
+              </Panel>
+            </Each>
+          </StackPanel>
+        </ScrollView>
+
+      </Grid>
+
+      <!-- Confirm Button -->
+      <CommonButton ButtonColor="color2" Label="CRIAR" ContentColor="white" Dock="Bottom">
+        <Clicked Handler="{create}"/>
+      </CommonButton>
+
+    </DockPanel>
+
+  </DockPanel>
+</Panel>

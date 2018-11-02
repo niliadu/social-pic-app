@@ -1,0 +1,86 @@
+<Panel>
+  <Panel ux:Class="OptionsMenu" Width="100%" Height="100%" >
+    <bool ux:Property="IsOpen"/>
+    <object ux:Property="Selected"/>
+    <object ux:Property="Options"/>
+
+    <JavaScript>
+      var Observable = require ("FuseJS/Observable");
+
+      var self = this;
+      var options = self.Options.inner();
+
+      function closeMenu () {
+        if (self.IsOpen instanceof Observable)
+          self.IsOpen.value = false;
+      }
+
+      module.exports = {
+        closeMenu : closeMenu,
+
+        options : options.map(function(option){
+          return {
+            title : option.name,
+            icon : option.icon,
+            color : option.color,
+            clicked : function () {
+              if (self.Selected instanceof Observable)
+                self.Selected.value.value = option.id;
+              if (self.IsOpen instanceof Observable)
+                self.IsOpen.value = false;
+            }
+          }
+        })
+      }
+    </JavaScript>
+
+    <!-- ComboBox Menu -->
+    <StackPanel ux:Name="menu" Width="100%" Height="100%" ContentAlignment="Center" Alignment="Center">
+      <Panel Height="120" Width="120">
+        <UserItem.Module Picture="{userPic}" Nickname="{userNick}" ContentColor="white" IconSize="34"/>
+      </Panel>
+      <Div.Simple/>
+
+      <Each Items="{options}">
+        <Panel>
+          <Match String="{title}">
+            <Case String="div">
+              <!-- Line -->
+              <Div.Simple/>
+            </Case>
+            <Case String="" IsDefault="true">
+              <Panel ux:Name="item" Height="50" HitTestMode="LocalBounds">
+                <!-- label -->
+                <Medium ux:Name="label" Value="{title}" FontSize="16" Color="{color}" TextAlignment="Center" Alignment="Center">
+                  <Icon ux:Name="icon" Value="{icon}" FontSize="22" Color="{color}" Alignment="CenterLeft" Offset="-26,0"/>
+                </Medium>
+
+                <!-- BG -->
+                <Rectangle ux:Name="bg" Width="100%" Height="100%" Color="{color}" Opacity="0" />
+
+                <Clicked Handler="{clicked}" />
+                <WhilePressed>
+                  <Change icon.Color="white" DurationBack="0.1" />
+                  <Change label.Color="white" DurationBack="0.1" />
+                  <Change bg.Opacity="1" DurationBack="0.1" />
+                </WhilePressed>
+              </Panel>
+            </Case>
+          </Match>
+        </Panel>
+      </Each>
+    </StackPanel>
+
+    <IconButton.Action Icon="{icons.close}" IconColor="white" IconSize="26" Alignment="TopRight">
+      <Clicked Handler="{closeMenu}" />
+    </IconButton.Action>
+
+    <!-- Background -->
+    <Panel ux:Name="bg" HitTestMode="LocalBounds" Color="color1" />
+
+    <WhileFalse Value="{Property this.IsOpen}">
+      <Change this.Opacity="0" Duration="0.1"/>
+      <Change this.Visibility="Hidden" Delay="0.1"/>
+    </WhileFalse>
+  </Panel>
+</Panel>

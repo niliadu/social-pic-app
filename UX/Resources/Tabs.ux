@@ -1,0 +1,81 @@
+<!-- Tab Class -->
+<Panel>
+  <Panel ux:Class="Tabs" Dock="Top">
+    <object ux:Property="Options"/>
+    <object ux:Property="Selected"/>
+
+    <float4 ux:Property="IdleColor"/>
+    <float4 ux:Property="ActiveColor"/>
+
+    <!-- Tabs -->
+    <JavaScript>
+      var Observable = require("FuseJS/Observable");
+      var markerXPos = Observable("0%");
+
+      var self = this;
+      var selected = self.Selected.inner();
+
+      var amount = self.Options.map(function(options){
+        return options.length;
+      });
+
+      var options = self.Options.inner().map(function(option){
+        return {
+          title : option.title,
+          index : option.index,
+          icon : option.icon,
+          color : Observable( function() {
+            if (selected.value === option.id) return self.ActiveColor.value;
+            return self.IdleColor.value;
+          }),
+          isSelected : Observable(function() { return selected.value === option.id; }),
+          clicked : function () {
+            if (self.Selected instanceof Observable) {
+              self.Selected.value.value = option.id;
+            }
+          }
+        }
+      });
+
+      var idleColor = Observable (self.IdleColor.value);
+      var activeColor = Observable (self.ActiveColor.value);
+
+      module.exports = {
+        idleColor : idleColor,
+        activeColor : activeColor,
+
+        amount : amount,
+        options : options
+      }
+
+    </JavaScript>
+
+    <Panel>
+      <Grid ColumnCount="{amount}" Width="100%" Height="60">
+        <Each Items="{options}">
+          <Panel ux:Name="tab" Alignment="Center" Height="100%" Width="100%" HitTestMode="LocalBounds">
+            <StackPanel ContentAlignment="Center" Dock="Fill">
+               <Icon ux:Name="tabIcon" Value="{icon}" Color="{color}" TextAlignment="Center"/>
+               <Light ux:Name="tabTitle" Value="{title}" Color="{color}" TextAlignment="Center" FontSize="12" />
+            </StackPanel>
+
+            <Rectangle ux:Name="marker" Height="4" Width="100%" Color="{activeColor}" Alignment="Bottom" HitTestMode="None" Visibility="Hidden" />
+            <Panel ux:Name="bg" Color="white" Opacity="0"/>
+
+            <WhileTrue Value="{isSelected}">
+              <Change marker.Visibility="Visible"/>
+            </WhileTrue>
+
+            <Clicked Handler="{clicked}" />
+
+            <WhilePressed>
+               <Change bg.Opacity="0.1" DurationBack="0.1" />
+            </WhilePressed>
+          </Panel>
+        </Each>
+      </Grid>
+
+      <!-- <Rectangle Width="100%" Height="1" Color="{idleColor}" Opacity="0.5" Alignment="Bottom" HitTestMode="None"/> -->
+    </Panel>
+  </Panel>
+</Panel>

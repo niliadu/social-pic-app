@@ -1,0 +1,25 @@
+<Panel>
+  <!-- Options Menu -->
+  <OptionsMenu IsOpen="{isOpen}" Options="{mainOptions}" Selected="{selectedOption}"/>
+
+  <IconButton.Action Icon="{icons.menu}" IconColor="white" IconSize="26" Alignment="TopRight">
+    <Clicked Handler="{toggleMenu}" />
+  </IconButton.Action>
+
+  <!-- Profile Button -->
+  <Panel Height="40" Width="40" Alignment="TopLeft" Padding="8">
+    <UserItem.Avatar Picture="{userPic}" ContentColor="white">
+      <Clicked Handler="{goToProfile}"/>
+    </UserItem.Avatar>
+  </Panel>
+
+  <Panel Height="40" Alignment="Top">
+    <LinearGradient StartPoint="0,0" EndPoint="1,0">
+      <GradientStop Offset="0" Color="color2" />
+      <GradientStop Offset="1" Color="color3" />
+    </LinearGradient>
+
+    <!-- App Title -->
+    <Medium Value="InCloset" FontSize="15" TextAlignment="Center" TextColor="white" Alignment="Center"/>
+  </Panel>
+</Panel>

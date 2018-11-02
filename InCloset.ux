@@ -1,0 +1,26 @@
+<App ux:Name="App" Background="#47494D" >
+	<!-- Scripts -->
+	<JavaScript File="JS/userStatesJS.js"/>
+	<JavaScript File="JS/popup.js"/>
+	<JavaScript File="JS/constants.js"/>
+	<JavaScript File="UX/Startup/JS/startup.js"/>
+
+	<!-- Resources -->
+	<ux:Include File="resources.ux" />
+
+	<DockPanel>
+		<!-- StatusBar Settings -->
+		<StatusBarBackground Dock="Top"/>
+		<iOS.StatusBarConfig Style="Light" Animation="Slide" IsVisible="True" />
+		<Android.StatusBarConfig Color="color1" IsVisible="True" />
+
+		<!-- AppView -->
+		<ux:Include File="UX/appView.ux" />
+
+		<!-- BottomBar Settings -->
+		<BottomBarBackground Dock="Bottom" IncludesKeyboard="false"/>
+	</DockPanel>
+
+	<!-- Background -->
+	<AppBackground/>
+</App>

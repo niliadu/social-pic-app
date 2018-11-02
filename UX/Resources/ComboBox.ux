@@ -1,0 +1,84 @@
+<Panel>
+   <!-- ComboBox Button -->
+   <Panel ux:Class="ComboBoxBtn" HitTestMode="LocalBounds">
+      <bool ux:Property="HasValue"/>
+      <string ux:Property="Placeholder"/>
+
+      <DockPanel Offset="0,8">
+         <Each Count="1" TemplateSource="this" TemplateKey="Option">
+            <DockPanel Padding="15,0,15,20">
+               <Icon Value="&#xE5CF;" FontSize="20" Color="color2" Dock="Right" Alignment="Bottom"/>
+               <Medium ux:Name="label" Value="{Property this.Placeholder}" FontSize="14" TextColor="gray2" Alignment="Bottom" TextAlignment="Left" Dock="Fill" />
+               <WhileTrue Value="{Property this.HasValue}">
+                  <Change label.Color="color2" />
+               </WhileTrue>
+            </DockPanel>
+         </Each>
+      </DockPanel>
+      <WhilePressed>
+         <Change this.Color="#eee"/>
+      </WhilePressed>
+      <!-- <Rectangle Color="color2" Height="1" Alignment="Bottom"/> -->
+   </Panel>
+
+   <!-- ComboBox -->
+   <Panel ux:Class="ComboBox">
+      <object ux:Property="Options"/>
+      <object ux:Property="Selected"/>
+      <bool ux:Property="IsOpen"/>
+
+      <JavaScript>
+        var Observable = require ("FuseJS/Observable");
+
+        var self = this;
+        var options = self.Options.inner();
+
+        module.exports = {
+           options : options.map(function(option){
+              return {
+                 title : option.name,
+                 value : option.val,
+                 isSelected : Observable(function() { return self.Selected.value.value.val == option.val; }),
+                 clicked : function () {
+                   if (self.Selected.value instanceof Observable) {
+                     self.Selected.value.value = option;
+                   }
+                 }
+              }
+           })
+        }
+      </JavaScript>
+
+      <!-- Dropdown -->
+      <StackPanel ux:Name="dropdown" Padding="12" Color="gray1" >
+        <IconButton.Action Icon="{icons.close}" IconColor="gray2" IconSize="26" Alignment="TopRight">
+          <Clicked>
+             <Set this.IsOpen="false" />
+          </Clicked>
+        </IconButton.Action>
+         <ScrollView>
+            <StackPanel Width="90%">
+               <Each Items="{options}">
+                  <Panel ux:Name="item" Height="40" HitTestMode="LocalBounds">
+                     <Medium ux:Name="title" Value="{title}" Color="gray2" TextAlignment="Center" Alignment="Center"/>
+                     <WhileTrue Value="{isSelected}">
+                       <Change title.Color="color2"/>
+                     </WhileTrue>
+                     <WhilePressed>
+                        <Change item.Color="gray1b"/>
+                     </WhilePressed>
+                     <Clicked Handler="{clicked}" >
+                        <Set this.IsOpen="false" />
+                     </Clicked>
+                     <!-- <Rectangle Color="white" Height="1" Alignment="Bottom"/> -->
+                  </Panel>
+               </Each>
+            </StackPanel>
+         </ScrollView>
+         <WhileFalse Value="{Property this.IsOpen}">
+            <Change dropdown.Opacity="0" Duration="0.2" Easing="CubicOut" />
+            <Change dropdown.Visibility="Hidden" Delay="0.2" />
+         </WhileFalse>
+      </StackPanel>
+   </Panel>
+</Panel>

@@ -1,0 +1,11 @@
+<Panel>
+  <Panel ux:Class="SplashScreen" Color="gray2">
+    <Router ux:Dependency="Router"/>
+
+    <!-- App Logo -->
+    <Image Source="img_appLogo" Width="100" Height="100" Alignment="Center"/>
+
+    <!-- Background -->
+    <AppBackground/>
+  </Panel>
+</Panel>

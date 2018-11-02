@@ -1,0 +1,119 @@
+<Panel>
+	<Page ux:Class="AppPage" />
+
+	<!-- Videos -->
+	<FileVideoSource ux:Global="loginVideo" File="Assets/Videos/12651872.mp4" />
+
+	<!-- Images -->
+	<FileImageSource ux:Global="img_appLogo" File="Icon/iconIN_T_256.png" />
+	<FileImageSource ux:Global="avatar" File="Assets/Images/avatar.jpg" />
+	<FileImageSource ux:Global="img_family" File="Assets/Images/family.jpg" />
+	<FileImageSource ux:Global="img_friends" File="Assets/Images/friends.jpg" />
+	<FileImageSource ux:Global="img_college" File="Assets/Images/college.jpg" />
+	<FileImageSource ux:Global="img_placeholder" File="Assets/Images/square.jpg" />
+	<FileImageSource ux:Global="img_default_group" File="Assets/Images/default_group.jpg" />
+	<FileImageSource ux:Global="post_placeholder" File="Assets/Images/post_placeholder.jpg" />
+
+	<!-- Fonts -->
+	<Font File="Assets/Fonts/Roboto-Regular.ttf" ux:Global="Light" />
+	<Font File="Assets/Fonts/Roboto-Italic.ttf" ux:Global="LightItalic" />
+	<Font File="Assets/Fonts/Roboto-Medium.ttf" ux:Global="Medium" />
+	<Font File="Assets/Fonts/Roboto-Black.ttf" ux:Global="Bold" />
+	<Font File="Assets/Fonts/MaterialIcons-Regular.ttf" ux:Global="Icons" />
+
+	<Text ux:Class="Light" Font="Light" TextWrapping="Wrap"/>
+	<Text ux:Class="LightItalic" Font="LightItalic" TextWrapping="Wrap"/>
+	<Text ux:Class="Medium" Font="Medium" TextWrapping="Wrap"/>
+	<Text ux:Class="Bold" Font="Bold" TextWrapping="Wrap"/>
+	<Text ux:Class="Icon" Font="Icons" TextWrapping="NoWrap" TextTruncation="None" Color="white" FontSize="24" TextAlignment="Center" Alignment="Center"/>
+
+	<!-- Colors -->
+	<float4 ux:Global="color1" ux:Value="#47494D" />
+	<float4 ux:Global="color2" ux:Value="#F77158" />
+	<float4 ux:Global="color3" ux:Value="#F99A53" />
+
+	<float4 ux:Global="gray1" ux:Value="#F7F7F7" />
+	<float4 ux:Global="gray1b" ux:Value="#E9E9E9" />
+	<float4 ux:Global="gray1c" ux:Value="#CCCCCC" />
+	<float4 ux:Global="gray2" ux:Value="#999999" />
+	<float4 ux:Global="gray3" ux:Value="#646464" />
+
+	<float4 ux:Global="white" ux:Value="#FFFFFF" />
+	<float4 ux:Global="fadeWhite" ux:Value="#FFFFFF88" />
+	<float4 ux:Global="black" ux:Value="#000000" />
+
+	<float4 ux:Global="fbColor" ux:Value="#2E318D" />
+
+	<!-- Classes -->
+	<ux:Include File="UX/Resources/AddButton.ux" />
+	<ux:Include File="UX/Resources/Alerts.ux" />
+	<ux:Include File="UX/Resources/AppBackground.ux" />
+	<ux:Include File="UX/Resources/BackHeader.ux" />
+	<ux:Include File="UX/Resources/ComboBox.ux" />
+	<ux:Include File="UX/Resources/CommonButton.ux" />
+	<ux:Include File="UX/Resources/ContextMenu.ux" />
+	<ux:Include File="UX/Resources/IconButton.ux" />
+	<ux:Include File="UX/Resources/GroupItem.ux" />
+	<ux:Include File="UX/Resources/OptionsMenu.ux" />
+	<ux:Include File="UX/Resources/Tabs.ux" />
+	<ux:Include File="UX/Resources/UserItem.ux" />
+
+	<!-- Startup Included Pages -->
+	<ux:Include File="UX/Startup/Login/login.ux" />
+	<ux:Include File="UX/Startup/SignupForm/signupForm.ux" />
+	<ux:Include File="UX/Startup/ProfileForm/profileForm.ux" />
+	<ux:Include File="UX/Startup/PasswordRecovery/passwordRecovery.ux" />
+
+	<!-- Main Included Pages -->
+	<ux:Include File="UX/Main/About/about.ux"/>
+	<ux:Include File="UX/Main/Config/config.ux"/>
+	<ux:Include File="UX/Main/CreateGroup/createGroup.ux"/>
+	<ux:Include File="UX/Main/Group/group.ux"/>
+	<ux:Include File="UX/Main/GroupConfig/groupConfig.ux"/>
+	<ux:Include File="UX/Main/MainView/mainView.ux" />
+	<ux:Include File="UX/Main/PostPhoto/postPhoto.ux"/>
+	<ux:Include File="UX/Main/Profile/profile.ux"/>
+	<ux:Include File="UX/Main/PhotoScore/photoScore.ux"/>
+
+	<!-- MainView Included Pages -->
+	<ux:Include File="UX/Main/MainView/News/news.ux" />
+	<ux:Include File="UX/Main/MainView/Groups/groups.ux" />
+	<ux:Include File="UX/Main/MainView/Friends/friends.ux" />
+
+	<!-- GalleryGrid Class -->
+	<Grid ux:Class="GalleryGrid" ColumnCount="2" ContentAlignment="Top" Alignment="Top" CellSpacing="6" Padding="6"/>
+
+	<!-- Div -->
+	<Panel ux:Class="Div.Simple" Height="20" ContentColor="gray1">
+		<float4 ux:Property="ContentColor" />
+
+		<Rectangle Color="{Property ContentColor}" Height="1" Width="60%" Alignment="Center" Opacity="0.1"/>
+	</Panel>
+
+	<Panel ux:Class="Div.Label" Height="30" LabelColor="gray2" ContentColor="color2">
+		<float4 ux:Property="ContentColor" />
+		<float4 ux:Property="LabelColor" />
+		<string ux:Property="Title" />
+
+		<Medium Value="{Property this.Title}" FontSize="14" Color="{Property this.ContentColor}" Alignment="Center" />
+		<Rectangle Color="{Property ContentColor}" Height="1" Width="100%" Alignment="Bottom" Opacity="0.5"/>
+	</Panel>
+
+	<!-- BtnToggle Class -->
+	<StackPanel ux:Class="BtnToggle" Orientation="Horizontal" ItemSpacing="10" HitTestMode="LocalBounds" >
+		<bool ux:Property="Target" />
+		<string ux:Property="Label" />
+
+		<Rectangle Width="16" Height="16">
+			<Stroke Width="1" Color="white" Alignment="Outside" />
+			<WhileTrue Value="{Property this.Target}">
+				<Rectangle Width="12" Height="12" Color="white"/>
+			</WhileTrue>
+		</Rectangle>
+		<Medium Value="{Property this.Label}" TextColor="white" FontSize="14" Alignment="BottomLeft" />
+	</StackPanel>
+
+	<JavaScript>
+
+	</JavaScript>
+</Panel>
